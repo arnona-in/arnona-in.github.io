@@ -44,6 +44,7 @@ const playTone = (frequency, duration, offset = 0) => {
   oscillator.start(context.currentTime + offset)
   oscillator.stop(context.currentTime + offset + duration + 0.03)
 }
+document.title = isBirthday.value ? 'Happy 26th birthday, Umang!' : `A little something for you — ${day} September 2026`
 
 const celebrate = () => {
   explored.value = true
@@ -52,11 +53,10 @@ const celebrate = () => {
     left: `${8 + Math.random() * 84}%`,
     delay: `${Math.random() * 0.35}s`,
     color: ['#d87862', '#edb866', '#7da69b', '#b985c4', '#f3d494'][index % 5],
-    rotate: `${Math.round(Math.random() * 240)}deg`,
-    duration: `${4.5 + Math.random() * 3}s`
+    rotate: `${Math.round(Math.random() * 240)}deg`
   }))
   if (isBirthday.value) {
-    ;[262, 262, 294, 262, 349, 330, 262, 262, 294, 262, 392, 349, 262, 262, 523, 440, 349, 330, 294, 392, 349, 392, 440, 523].forEach((note, index) => playTone(note, 0.3, index * 0.27))
+    ;[262, 262, 294, 262, 349, 330, 262, 262, 294, 262, 392, 349].forEach((note, index) => playTone(note, 0.28, index * 0.22))
   } else {
     playTone(523, 0.2)
     playTone(659, 0.25, 0.15)
@@ -68,10 +68,7 @@ const celebrate = () => {
   <section class="for-you-page">
     <div class="for-you-orb orb-one"></div>
     <div class="for-you-orb orb-two"></div>
-    <span v-for="piece in confetti" :key="piece.id" class="confetti" :style="{ left: piece.left, animationDelay: piece.delay, animationDuration: piece.duration, background: piece.color, transform: `rotate(${piece.rotate})` }"></span>
-    <div v-if="isBirthday && explored" class="balloon-field" aria-hidden="true">
-      <span class="balloon balloon-pink"></span><span class="balloon balloon-yellow"></span><span class="balloon balloon-green"></span>
-    </div>
+    <span v-for="piece in confetti" :key="piece.id" class="confetti" :style="{ left: piece.left, animationDelay: piece.delay, background: piece.color, transform: `rotate(${piece.rotate})` }"></span>
 
     <div class="for-you-card">
       <div v-if="isBeforeReveal" class="for-you-message">
@@ -84,12 +81,8 @@ const celebrate = () => {
         <p class="date-stamp">26 · 09 · 2026</p>
         <h1>Happy 26th<br /><em>birthday, Umang.</em></h1>
         <p class="poem">May every road you take be gentle,<br />may every dream find a door,<br />and may your beautiful heart<br />always know what it is here for.<br /><br />You are on a good path, Umang —<br />keep walking it with your bright, brave grace.<br />The world is luckier with you in it.</p>
-        <button v-if="!explored" class="for-you-button" @click="celebrate">Open your birthday wish <span>✦</span></button>
-        <div v-else class="birthday-reveal">
-          <div class="birthday-number">26</div>
-          <p class="after-message">Twenty-six in 2026 — a special little alignment, made just for you. 🎂</p>
-          <p class="celebration-line">Today, the whole sky is cheering for you, Umang.</p>
-        </div>
+        <button class="for-you-button" @click="celebrate">Open your birthday wish <span>✦</span></button>
+        <p v-if="explored" class="after-message">Twenty-six in 2026 — a special little alignment, made just for you. 🎂</p>
       </div>
       <div v-else class="for-you-message">
         <p class="date-stamp">{{ day }} · 09 · 2026</p>
@@ -118,8 +111,7 @@ const celebrate = () => {
 .next-reveal { animation: reveal .6s ease both; }.next-reveal > p, .revealed-line { max-width: 390px; color: #29473e; font: 500 22px/1.45 'Playfair Display', serif; }
 .for-you-button.secondary { margin-top: 25px; color: #29473e; background: transparent; border: 1px solid #29473e; }.for-you-footer { color: #9e897e; font: 12px 'Playfair Display', serif; }.for-you-footer span { color: #d27762; font-size: 16px; margin-left: 4px; }
 .poem { color: #625f59; font: 16px/1.75 'Playfair Display', serif; }.birthday-message h1 { margin-top: 14px; font-size: clamp(43px, 6vw, 65px); }.after-message { margin-top: 20px; color: #c76b45; font-size: 12px; }
-.for-you-orb { position: absolute; border-radius: 50%; filter: blur(1px); opacity: .65; }.orb-one { width: 350px; height: 350px; top: -130px; left: -90px; background: #f2c7ba; }.orb-two { width: 420px; height: 420px; bottom: -210px; right: -140px; background: #d5e4ce; }.confetti { position: absolute; z-index: 4; top: -20px; width: 8px; height: 17px; animation: fall 6s ease-in forwards; }
-.birthday-reveal { animation: birthday-reveal .9s cubic-bezier(.2,.8,.2,1) both; }.birthday-number { color: #d87862; font: 700 74px/.8 'Playfair Display', serif; text-shadow: 3px 4px 0 #f4d494; animation: number-pop 1.4s ease-in-out infinite alternate; }.celebration-line { margin: 17px auto 0; color: #29473e; font: 500 18px/1.4 'Playfair Display', serif; }.balloon-field { position: absolute; z-index: 1; inset: 0; pointer-events: none; }.balloon { position: absolute; bottom: -90px; width: 70px; height: 88px; border-radius: 50% 50% 48% 48%; animation: balloon-rise 9s ease-in-out infinite; }.balloon::after { content: ''; position: absolute; width: 1px; height: 160px; top: 82px; left: 50%; background: rgba(86, 91, 80, .45); }.balloon-pink { left: 7%; background: #e29b9b; animation-delay: .2s; }.balloon-yellow { right: 8%; width: 58px; height: 74px; background: #ebc26f; animation-delay: 1.4s; }.balloon-green { left: 88%; width: 47px; height: 62px; background: #91b5a0; animation-delay: 2.1s; }
-@keyframes card-in { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: none; } } @keyframes float { 50% { transform: translateY(-8px) rotate(8deg); } } @keyframes reveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } } @keyframes birthday-reveal { from { opacity: 0; transform: scale(.82) translateY(15px); } to { opacity: 1; transform: scale(1) translateY(0); } } @keyframes number-pop { to { transform: scale(1.08) rotate(-3deg); } } @keyframes fall { to { top: 105%; transform: translateY(0) rotate(540deg); } } @keyframes balloon-rise { 0% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-410px) rotate(7deg); } 100% { transform: translateY(-760px) rotate(-5deg); } }
+.for-you-orb { position: absolute; border-radius: 50%; filter: blur(1px); opacity: .65; }.orb-one { width: 350px; height: 350px; top: -130px; left: -90px; background: #f2c7ba; }.orb-two { width: 420px; height: 420px; bottom: -210px; right: -140px; background: #d5e4ce; }.confetti { position: absolute; z-index: 4; top: -20px; width: 8px; height: 17px; animation: fall 2.2s ease-in forwards; }
+@keyframes card-in { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: none; } } @keyframes float { 50% { transform: translateY(-8px) rotate(8deg); } } @keyframes reveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } } @keyframes fall { to { top: 105%; transform: translateY(0) rotate(540deg); } }
 @media (max-width: 600px) { .for-you-page { padding: 35px 16px 55px; min-height: 650px; }.for-you-card { min-height: 580px; padding: 40px 20px 28px; }.poem { font-size: 14px; }.next-reveal > p, .revealed-line { font-size: 19px; } }
 </style>
