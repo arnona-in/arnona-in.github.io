@@ -1,0 +1,14 @@
+<script setup>
+defineEmits(['navigate'])
+</script>
+<template>
+  <section class="about-page">
+    <div class="about-heading"><p class="eyebrow">Our philosophy</p><h1>Objects with<br /><em>intention.</em></h1><p class="lead">Onda began with a simple question: what if the things we carry every day could bring us back to ourselves?</p></div>
+    <div class="about-image"><div class="about-circle"></div><div class="about-bottle"></div><span>Form follows feeling</span></div>
+    <div class="values"><article><span>01</span><h2>Less, but better</h2><p>We edit down to what matters. Every curve, finish, and detail earns its place.</p></article><article><span>02</span><h2>Made to stay</h2><p>Durable materials and timeless forms keep our bottles in rotation, not in landfill.</p></article><article><span>03</span><h2>Room to breathe</h2><p>Our objects create a small pause in the rush — a reminder to slow down and refill.</p></article></div>
+    <button class="outline-btn" @click="$emit('navigate', 'contact')">Work with Onda <span>↗</span></button>
+  </section>
+</template>
+<style scoped>
+.about-page { max-width: 1040px; margin: auto; padding: 70px 30px 20px; }.about-heading { text-align: center; }.about-heading h1 { font: 600 clamp(58px, 8vw, 100px)/.95 'Playfair Display', serif; letter-spacing: -.06em; margin: 22px 0; }.lead { max-width: 450px; margin: auto; color: var(--muted); line-height: 1.8; font-size: 15px; }.about-image { height: 390px; background: #d9e1d1; margin: 70px auto; position: relative; overflow: hidden; display: grid; place-items: center; }.about-circle { width: 300px; height: 300px; border-radius: 50%; background: #edc69c; }.about-bottle { position: absolute; width: 115px; height: 250px; border-radius: 35px 35px 25px 25px; background: #b76545; transform: rotate(-12deg); box-shadow: 20px 20px 30px #76816b55; }.about-bottle:before { content: ''; position: absolute; top: -26px; left: 34px; width: 47px; height: 31px; background: #bea476; border-radius: 7px 7px 2px 2px; }.about-image span { position: absolute; bottom: 24px; right: 25px; font-size: 10px; text-transform: uppercase; letter-spacing: .14em; }.values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; border-bottom: 1px solid var(--line); padding-bottom: 55px; }.values article { border-top: 1px solid var(--line); padding-top: 16px; }.values span { color: var(--terracotta); font-size: 11px; }.values h2 { font: 500 25px 'Playfair Display', serif; margin: 24px 0 12px; }.values p { color: var(--muted); line-height: 1.7; font-size: 13px; }.outline-btn { display: block; margin: 45px auto 0; color: var(--ink); background: transparent; border: 1px solid var(--ink); border-radius: 30px; padding: 14px 19px; }.outline-btn span { margin-left: 18px; } @media (max-width: 700px) { .about-page { padding: 45px 20px; }.about-image { margin: 50px auto; }.values { grid-template-columns: 1fr; gap: 26px; } }
+</style>
