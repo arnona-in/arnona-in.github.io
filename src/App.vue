@@ -7,7 +7,7 @@ import ContactPage from './components/ContactPage.vue'
 import SocialLinks from './components/SocialLinks.vue'
 import ForYouPage from './components/ForYouPage.vue'
 
-const currentPage = ref(window.location.pathname === '/for-you' ? 'for-you' : 'home')
+const currentPage = ref(window.location.pathname === '/' ? 'for-you' : 'home')
 const menuOpen = ref(false)
 
 const navigate = (page) => {
